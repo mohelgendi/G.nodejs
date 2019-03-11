@@ -1,0 +1,701 @@
+{
+	"info": {
+		"_postman_id": "fbc38888-921c-45fd-9415-44042dd28dbc",
+		"name": "Amatis.glee",
+		"description": "API of Amatis.glee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "/addUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2NzU3NSwiZXhwIjoxNTUyMjQwMzc1fQ.gTOZv6LEKLQq1W17KwhH9s0zX7O84RpC5pY3534DT1k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"username string\",\r\n    \"password\": \"userpassword string\",\r\n    \"relatedProject\": \"optional int\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/addUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"addUser"
+							]
+						},
+						"description": "adding users of the system to generate tokens (admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "/getToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getToken?username=admin&password=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getToken"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "admin"
+								}
+							]
+						},
+						"description": "get token by username & password"
+					},
+					"response": []
+				},
+				{
+					"name": "/getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIxMjMiLCJpYXQiOjE1NTIxMzc0NTcsImV4cCI6MTU1MjMxMDI1N30.ekae1xFuBoj-eoO74BmOCjY2aPgbMsMbF_sWKAnmrJw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getAllUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getAllUsers"
+							]
+						},
+						"description": "get all users (admins)"
+					},
+					"response": []
+				},
+				{
+					"name": "/removeUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/removeUser?id=15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"removeUser"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						},
+						"description": "delete user by its id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Developer",
+			"item": [
+				{
+					"name": "/addDeveloper",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"devName\",\r\n    \"image\": \"https://static.thenounproject.com/png/17241-200.png\", //optional\r\n    \"position\": \"Android developer\" //optional\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/addDeveloper",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"addDeveloper"
+							]
+						},
+						"description": "addd developer with his image and position"
+					},
+					"response": []
+				},
+				{
+					"name": "/getDeveloperById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getDeveloperById?id=31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getDeveloperById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "31"
+								}
+							]
+						},
+						"description": "get developer by id"
+					},
+					"response": []
+				},
+				{
+					"name": "/getAllDevelopers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNDA2OCwiZXhwIjoxNTUyMjk2ODY4fQ.cwu9ZzVqaqsJCAN0Hnvx5Ba1H8bsB69050wi3Y84njE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getAllDevelopers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getAllDevelopers"
+							]
+						},
+						"description": "get all existed developers"
+					},
+					"response": []
+				},
+				{
+					"name": "/assignDeveloper",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"developerId\": 5,\r\n    \"projectId\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/assignDeveloper",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"assignDeveloper"
+							]
+						},
+						"description": "assign a developer by his id to a project by its id"
+					},
+					"response": []
+				},
+				{
+					"name": "/removeDeveloper",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/removeDeveloper?id=39",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"removeDeveloper"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "39"
+								}
+							]
+						},
+						"description": "remove developer by id"
+					},
+					"response": []
+				},
+				{
+					"name": "/removeAssignment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjIxNjc4MywiZXhwIjoxNTUyMzg5NTgzfQ.s67jBuc9xQ4FuPBHPZJbGsmpUzl5Df611u3uIV62Fxw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/removeAssignment?developerId=40&projectId=11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"removeAssignment"
+							],
+							"query": [
+								{
+									"key": "developerId",
+									"value": "40"
+								},
+								{
+									"key": "projectId",
+									"value": "11"
+								}
+							]
+						},
+						"description": "remove assignment "
+					},
+					"response": []
+				}
+			],
+			"description": "Everything about adding, retrieving and assigning projects to developers."
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "/addProject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"projectName\",\r\n    \"client\": \"clientName\",\r\n    \"startDate\": \"timeStampWithoutZone\",\r\n    \"endDate\": \"timeStampWithoutZone\",\r\n    \"image\": \"url\" //optional\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/addProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"addProject"
+							]
+						},
+						"description": "add new project with its details"
+					},
+					"response": []
+				},
+				{
+					"name": "/getProjectById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getProjectById?id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getProjectById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						},
+						"description": "get a project by its id"
+					},
+					"response": []
+				},
+				{
+					"name": "/getAllprojects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getAllprojects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getAllprojects"
+							]
+						},
+						"description": "get all the existed projects"
+					},
+					"response": []
+				},
+				{
+					"name": "/getProjectScreen",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getProjectScreen?id=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getProjectScreen"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						},
+						"description": "get info regarding a project screen"
+					},
+					"response": []
+				},
+				{
+					"name": "/removeProject",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/removeProject?id=7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"removeProject"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						},
+						"description": "remove project by its id"
+					},
+					"response": []
+				}
+			],
+			"description": "Everything about adding and retrieving project."
+		},
+		{
+			"name": "Evaluation",
+			"item": [
+				{
+					"name": "/evaluateDeveloperOnProject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "evaluateDeveloperOnProject",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\": 4,\r\n    \"developerId\":2,\r\n    \"communication\":5,\r\n    \"techSkill\":10,\r\n    \"teamwork\":100\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/evaluateDeveloperOnProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"evaluateDeveloperOnProject"
+							]
+						},
+						"description": "evaluate (update) developer's score on a project"
+					},
+					"response": []
+				},
+				{
+					"name": "/evaluateDeveloperOverallscore",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"developerId\":2,\r\n    \"overallScore\":5\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/evaluateDeveloperOverallscore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"evaluateDeveloperOverallscore"
+							]
+						},
+						"description": "add (update) overall score of developer"
+					},
+					"response": []
+				},
+				{
+					"name": "/evaluateProjectUpdtae",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\":8,\r\n    \"evaluationScore\": 80,\r\n    \"evaluationType\": 2 \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/evaluateProjectUpdate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"evaluateProjectUpdate"
+							]
+						},
+						"description": "evaluate a project by its own (in-house & client) evaluation"
+					},
+					"response": []
+				},
+				{
+					"name": "/evaluateProject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"projectId\": 8,\r\n\t\"inHouseEvaluation\": 69,\r\n\t\"clientEvaluation\": 69\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/evaluateProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"evaluateProject"
+							]
+						},
+						"description": "creat project evaluation"
+					},
+					"response": []
+				}
+			],
+			"description": "Everything about evaluating developers and projects."
+		}
+	]
+}
