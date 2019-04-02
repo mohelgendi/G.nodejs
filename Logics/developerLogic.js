@@ -4,8 +4,8 @@ let developerLogic = {
         newDev.table = 'developer';
         newDev.object = {
             name: developer.name,
-            image: developer.image == undefined ? null : developer.image,
-            position: developer.position == undefined ? null : developer.position
+            image: developer.image == undefined ? "https://agrimachinery.nic.in/Images/User/User.png" : developer.image,
+            position: developer.position == undefined ? "Developer" : developer.position
         };
         newDev.then = function (thenData) {
             return thenFunc(thenData);

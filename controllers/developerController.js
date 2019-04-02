@@ -41,7 +41,7 @@ module.exports = function (application) {
     })
     app.delete('/removeDeveloper', (req, res) => {
         authContainer.verify(req, res, function () {
-            let id = req.query.id;
+            let id = req.body.id;
             developerLogic.removeDeveloper(id, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {
@@ -63,8 +63,8 @@ module.exports = function (application) {
     })
     app.delete('/removeAssignment', (req, res) => {
         authContainer.verify(req, res, function () {
-            let developerId = req.query.developerId;
-            let projectId = req.query.projectId;
+            let developerId = req.body.developerId;
+            let projectId = req.body.projectId;
             developerLogic.removeAssignment(developerId, projectId, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {

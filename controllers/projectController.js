@@ -48,7 +48,7 @@ module.exports = function (application) {
     })
     app.delete('/removeProject', (req, res) => {
         authContainer.verify(req, res, function () {
-            let id = req.query.id;
+            let id = req.body.id;
             projectLogic.removeProject(id, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {

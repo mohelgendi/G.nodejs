@@ -66,3 +66,6 @@ POST:/evaluateProject
     "evaluationScore": 50,
     "evaluationType": 1 //1= in-house valuation, 2=client evaluation
 }
+////////////////
+http://jira.amatis.work/rest/agile/1.0/board
+getIssuesForBoard(boardId: string)

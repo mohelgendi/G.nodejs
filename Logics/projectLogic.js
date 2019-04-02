@@ -7,7 +7,7 @@ let projectLogic = {
             client: project.client,
             startDate: project.startDate,
             endDate: project.endDate,
-            image: project.image
+            image: project.image == undefined ? 'https://pbs.twimg.com/profile_images/824249686919958529/kxPhe7Kk.jpg' : project.image
         };
         newproj.then = function (thenData) {
             return thenFunc(thenData);

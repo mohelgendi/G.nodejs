@@ -19,20 +19,20 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false,
 			field: 'client'
 		},
-		startDate: {
-			type: DataTypes.TIME,
-			allowNull: true,
-			field: 'start_date'
-		},
-		endDate: {
-			type: DataTypes.TIME,
-			allowNull: true,
-			field: 'end_date'
-		},
 		image: {
 			type: DataTypes.STRING,
 			allowNull: true,
 			field: 'image'
+		},
+		startDate: {
+			type: DataTypes.STRING,
+			allowNull: true,
+			field: 'start_date'
+		},
+		endDate: {
+			type: DataTypes.STRING,
+			allowNull: true,
+			field: 'end_date'
 		}
 	}, {
 		tableName: 'project'

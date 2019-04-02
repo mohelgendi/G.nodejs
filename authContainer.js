@@ -11,7 +11,7 @@ returnObject.sign = function (username, password, errFunc, thenFunc) {
     authQuery.then = function (data) {
         if (data.length == 1 && data[0].name == username && data[0].password == password) {
             let authObj = { username, password };
-            jwt.sign(authObj, 'secretkey', { expiresIn: "2d" }, (err, token) => {
+            jwt.sign(authObj, 'secretkey', { expiresIn: "5d" }, (err, token) => {
                 if (err) {
                     return errFunc(err);
                 } else {

@@ -48,6 +48,7 @@ Ref: user.related_project > project.id
 https://dbdiagram.io/d/5c754cd8f7c5bb70c72f213a
 ////////////////////////////////////////////////////////
 Developer <--> Project
+"project_screen"
 SELECT d.id AS dev_id,
 d.name AS dev_name,
 d.image AS dev_image,
