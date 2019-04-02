@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
@@ -15,7 +15,14 @@ global.ViewQueryModel = require('./OrmModels/ViewQueryModel.js');
 global.InsertOrUpdateModel = require('./OrmModels/InsertOrUpdateModel.js');
 global.QueryJSONModel = require('./OrmModels/QueryJSONModel.js');
 global.QueryStringModel = require('./OrmModels/QueryStringModel.js');
-global.ormContainer = require('./ormContainer')('postgres', 'Amatis.glee', 'postgres', 'wsxzaqw', '127.0.0.1', 5432);
+global.ormContainer = require('./ormContainer')(
+    'postgres',
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS,
+    process.env.DB_HOST,
+    process.env.DB_PORT,
+);
 
 var swaggerUi = require('swagger-ui-express'),swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
