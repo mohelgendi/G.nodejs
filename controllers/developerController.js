@@ -9,12 +9,13 @@ module.exports = function (application, upload) {
     app = application;
     app.post('/addDeveloper', upload.single('image'),(req, res) => {
         authContainer.verify(req, res, function () {
+            console.log(req);
             let image;
             const file = req.file
             if(!file){
                 image = undefined;
             }else{
-                image ="myhost/"+file.originalname;
+                image ="glee.amatis.work/uploads/"+file.originalname;
             }
             let name = req.body.name;
             let position = req.body.position;
