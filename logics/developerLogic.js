@@ -1,11 +1,11 @@
 let developerLogic = {
-    addDeveloper: function (developer, thenFunc, errFunc) {
+    addDeveloper: function (name, position, image, thenFunc, errFunc) {
         let newDev = new InsertModel();
         newDev.table = 'developer';
         newDev.object = {
-            name: developer.name,
-            image: developer.image == undefined ? "https://agrimachinery.nic.in/Images/User/User.png" : developer.image,
-            position: developer.position == undefined ? "Developer" : developer.position
+            name: name,
+            image: image == undefined ? "https://agrimachinery.nic.in/Images/User/User.png" : image,
+            position: position == undefined ? "Developer" : position
         };
         newDev.then = function (thenData) {
             return thenFunc(thenData);

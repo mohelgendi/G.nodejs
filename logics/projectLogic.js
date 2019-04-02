@@ -1,13 +1,13 @@
 let projectLogic = {
-    addProject: function (project, thenFunc, errFunc) {
+    addProject: function (name, client, startDate, endDate, image, thenFunc, errFunc) {
         let newproj = new InsertModel();
         newproj.table = 'project';
         newproj.object = {
-            name: project.name,
-            client: project.client,
-            startDate: project.startDate,
-            endDate: project.endDate,
-            image: project.image == undefined ? 'https://pbs.twimg.com/profile_images/824249686919958529/kxPhe7Kk.jpg' : project.image
+            name: name,
+            client: client,
+            startDate: startDate,
+            endDate: endDate,
+            image: image == undefined ? 'https://pbs.twimg.com/profile_images/824249686919958529/kxPhe7Kk.jpg' : image
         };
         newproj.then = function (thenData) {
             return thenFunc(thenData);

@@ -5,13 +5,20 @@ let developerLogic = require('../logics/developerLogic.js');
 let HttpStatus = constants.HttpStatus;
 
 var app;
-module.exports = function (application) {
+module.exports = function (application, upload) {
     app = application;
-    app.post('/addDeveloper', (req, res) => {
+    app.post('/addDeveloper', upload.single('image'),(req, res) => {
         authContainer.verify(req, res, function () {
-            console.log(JSON.stringify(req.body));
-            let newDev = req.body;
-            developerLogic.addDeveloper(newDev, function (thenData) {
+            let image;
+            const file = req.file
+            if(!file){
+                image = undefined;
+            }else{
+                image ="myhost/"+file.originalname;
+            }
+            let name = req.body.name;
+            let position = req.body.position;
+            developerLogic.addDeveloper(name, position, image, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {
                 res.status(400).send({ error: err });

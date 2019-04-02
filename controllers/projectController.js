@@ -4,12 +4,22 @@ let projectLogic = require('../logics/projectLogic.js');
 let HttpStatus = constants.HttpStatus;
 
 var app;
-module.exports = function (application) {
+module.exports = function (application, upload) {
     app = application;
-    app.post('/addProject', (req, res) => {
+    app.post('/addProject', upload.single('image'), (req, res) => {
         authContainer.verify(req, res, function () {
-            let newproj = req.body;
-            projectLogic.addProject(newproj, function (thenData) {
+            let image;
+            const file = req.file
+            if(!file){
+                image = undefined;
+            }else{
+                image ="myhost/"+file.originalname;
+            }
+            let name = req.body.projectName;
+            let client = req.body.clientName;
+            let startDate = req.body.startDate;
+            let endDate = req.body.endDate;
+            projectLogic.addProject(name, client, startDate, endDate, image, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {
                 res.status(400).send({ error: err });

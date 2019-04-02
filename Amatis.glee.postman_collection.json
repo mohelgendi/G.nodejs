@@ -265,13 +265,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MzQzNzQzMiwiZXhwIjoxNTUzNjEwMjMyfQ.xQJiNTqudg6LQRIaLWB52EexsWukGLMEKaiigMGpdkw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"developerId\": 5,\r\n    \"projectId\": 1\r\n}"
+							"raw": "{\r\n    \"developerId\": 43,\r\n    \"projectId\": 9\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/assignDeveloper",
@@ -297,14 +297,20 @@
 								"key": "Authorization",
 								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
 								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"id\": 99\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/removeDeveloper?id=39",
+							"raw": "http://localhost:3000/removeDeveloper",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -312,12 +318,6 @@
 							"port": "3000",
 							"path": [
 								"removeDeveloper"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "39"
-								}
 							]
 						},
 						"description": "remove developer by id"
@@ -331,16 +331,22 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjIxNjc4MywiZXhwIjoxNTUyMzg5NTgzfQ.s67jBuc9xQ4FuPBHPZJbGsmpUzl5Df611u3uIV62Fxw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MzQzNzQzMiwiZXhwIjoxNTUzNjEwMjMyfQ.xQJiNTqudg6LQRIaLWB52EexsWukGLMEKaiigMGpdkw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"developerId\":43 ,\n\t\"projectId\":9\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/removeAssignment?developerId=40&projectId=11",
+							"raw": "http://localhost:3000/removeAssignment",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -348,16 +354,6 @@
 							"port": "3000",
 							"path": [
 								"removeAssignment"
-							],
-							"query": [
-								{
-									"key": "developerId",
-									"value": "40"
-								},
-								{
-									"key": "projectId",
-									"value": "11"
-								}
 							]
 						},
 						"description": "remove assignment "
@@ -479,7 +475,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MzQzNzQzMiwiZXhwIjoxNTUzNjEwMjMyfQ.xQJiNTqudg6LQRIaLWB52EexsWukGLMEKaiigMGpdkw",
 								"type": "text"
 							}
 						],
@@ -488,7 +484,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3000/getProjectScreen?id=4",
+							"raw": "http://localhost:3000/getProjectScreen?id=9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -500,7 +496,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "4"
+									"value": "9"
 								}
 							]
 						},
@@ -515,16 +511,22 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjEyNzYzOSwiZXhwIjoxNTUyMzAwNDM5fQ.sLviD-jNVaiyK1DXjastEynGwnVCDCC6By3EWebjjBg",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MzU4NDk3NCwiZXhwIjoxNTU0MDE2OTc0fQ.0EsUVUx2-mgXBfz_QXwyGXO0WM-XuBB11YnuYCHKjoQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"id\":14\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/removeProject?id=7",
+							"raw": "http://localhost:3000/removeProject",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -532,12 +534,6 @@
 							"port": "3000",
 							"path": [
 								"removeProject"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "7"
-								}
 							]
 						},
 						"description": "remove project by its id"

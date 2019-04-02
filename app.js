@@ -1,4 +1,13 @@
 require('dotenv').config();
+const multer = require('multer');
+var storage = multer.diskStorage({
+    destination: 'uploads',
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  })
+  
+const upload = multer({ storage: storage })
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
@@ -28,8 +37,8 @@ var swaggerUi = require('swagger-ui-express'),swaggerDocument = require('./swagg
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', express.Router());
 
-require('./controllers/developerController')(app);
-require('./controllers/projectController')(app);
+require('./controllers/developerController')(app, upload);
+require('./controllers/projectController')(app, upload);
 require('./controllers/evaluationController')(app);
 require('./controllers/authController')(app);
 
