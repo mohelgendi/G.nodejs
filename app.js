@@ -1,22 +1,23 @@
 require('dotenv').config();
+
 const multer = require('multer');
+const upload = multer({ storage: storage });
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express();
+
 var storage = multer.diskStorage({
     destination: 'uploads',
     filename: function (req, file, cb) {
-      cb(null, file.originalname)
+        cb(null, file.originalname)
     }
-  })
-  
-const upload = multer({ storage: storage })
-const express = require('express');
-var bodyParser = require('body-parser');
-const app = express();
-const port = 3000;
-var cors = require('cors');
-app.use(cors());
+});
 
+app.use(cors());
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500000}));
+
 global.InsertModel = require('./OrmModels/InsertModel.js');
 global.DeleteModel = require('./OrmModels/DeleteModel.js');
 global.UpdateModel = require('./OrmModels/UpdateModel.js');
@@ -33,13 +34,9 @@ global.ormContainer = require('./ormContainer')(
     process.env.DB_PORT,
 );
 
-var swaggerUi = require('swagger-ui-express'),swaggerDocument = require('./swagger.json');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/api/v1', express.Router());
-
 require('./controllers/developerController')(app, upload);
 require('./controllers/projectController')(app, upload);
 require('./controllers/evaluationController')(app);
 require('./controllers/authController')(app);
 
-app.listen(port, () =>console.log(`Example app listening on port ${port}!`));
+app.listen(3000, () =>console.log(`Example app listening on port 3000!`));

@@ -3,6 +3,7 @@
 /.idea
 /.vscode
 /sequelizer
+/uploads
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
