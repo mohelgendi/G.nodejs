@@ -15,7 +15,7 @@ returnObject.sign = function (username, password, errFunc, thenFunc) {
                 if (err) {
                     return errFunc(err);
                 } else {
-                    return thenFunc(token);
+                    return thenFunc(token,data[0].relatedProject);
                 }
             });
         } else {

@@ -4,6 +4,10 @@
 /.vscode
 /sequelizer
 /uploads/*
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34a67c91c833a0c63c9388c448accbbfd11eb0fb
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

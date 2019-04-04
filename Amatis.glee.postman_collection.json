@@ -373,7 +373,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1MjA2Nzg1OSwiZXhwIjoxNTUyMjQwNjU5fQ.gJwT2IW3EX152LkhT2KJC0uhoxxGhOo_RI_WSBjkszM",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTU1NDIxMDkxNCwiZXhwIjoxNTU0NjQyOTE0fQ.5TCDqxfAwYKbiu0YSPDqdSXt7ls1QOmjVkchw8kX7sM",
 								"type": "text"
 							},
 							{
@@ -384,8 +384,34 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"projectName\",\r\n    \"client\": \"clientName\",\r\n    \"startDate\": \"timeStampWithoutZone\",\r\n    \"endDate\": \"timeStampWithoutZone\",\r\n    \"image\": \"url\" //optional\r\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "projectName",
+									"value": "XXTEST",
+									"type": "text"
+								},
+								{
+									"key": "clientName",
+									"value": "XXAA",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2019-05-06",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2019-09-06",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:3000/addProject",
@@ -537,6 +563,36 @@
 							]
 						},
 						"description": "remove project by its id"
+					},
+					"response": []
+				},
+				{
+					"name": "/getAllProjectsScreens",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNvb2JseSIsInBhc3N3b3JkIjoiY29vYmx5IiwiaWF0IjoxNTU0MzQyMzg3LCJleHAiOjE1NTQ3NzQzODd9.SjTINRPMdh1dYLJk8ItaDnozJU7i0U7tG_eyU5fJz-k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/getAllProjectsScreens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getAllProjectsScreens"
+							]
+						},
+						"description": "gets all the projects including their screens"
 					},
 					"response": []
 				}

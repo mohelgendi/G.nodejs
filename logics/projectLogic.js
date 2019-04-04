@@ -24,7 +24,7 @@ let projectLogic = {
         findQuery.then = function (data) {
             return thenFunc(data);
         };
-        findQuery.err = function(err){
+        findQuery.err = function (err) {
             return errFunc(err);
         }
         return ormContainer.SelectByJSONOperands(findQuery);
@@ -35,7 +35,7 @@ let projectLogic = {
         findQuery.then = function (data) {
             return thenFunc(data);
         };
-        findQuery.err = function(err){
+        findQuery.err = function (err) {
             return errFunc(err);
         }
         return ormContainer.SelectByJSONOperands(findQuery);
@@ -44,13 +44,29 @@ let projectLogic = {
         let viewQuery = new ViewQueryModel();
         viewQuery.view = "project_screen";
         viewQuery.JSONFilter = { project_id: { [ormContainer.Op.eq]: id } };
-        viewQuery.then = function(thenData){
+        viewQuery.then = function (thenData) {
             return thenFunc(thenData);
         };
-        viewQuery.err = function(err){
+        viewQuery.err = function (err) {
             return errFunc(err);
         };
         return ormContainer.SelectViewByQuery(viewQuery)
+    },
+    getAllProjectsScreens: function (thenFunc, errFunc) {
+        this.getAllProjects(function (then) {
+            let allProjects = then;
+            let resultPromises = allProjects.map(project => {
+                return new Promise((resolve, reject) => {
+                    container.getProjectScreen(project.id, (thenData) => {
+                        project.screen = thenData[0].dev_id==null? []: thenData;
+                        resolve(project)
+                    }, reject);
+                });
+            });
+            Promise.all(resultPromises).then(thenFunc).catch(errFunc)
+        }, function (err) {
+            return errFunc(err);
+        });
     },
     removeProject: function (id, thenFunc, errFunc) {
         let deleteQuery = new DeleteModel();
@@ -65,4 +81,6 @@ let projectLogic = {
         return ormContainer.Delete(deleteQuery);
     }
 };
+let container = projectLogic;
+
 module.exports = projectLogic;

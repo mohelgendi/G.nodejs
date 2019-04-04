@@ -9,8 +9,8 @@ module.exports = function (application) {
         let password = req.query.password;
         authContainer.sign(username, password, function(err){
             res.status(401).send({ error: err});
-        },function(thenData){
-            res.status(200).send({ token: thenData});
+        },function(token, relatedProject){
+            res.status(200).send({ token, relatedProject});
         });
     })
 

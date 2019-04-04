@@ -50,6 +50,16 @@ module.exports = function (application, upload) {
     app.get('/getProjectScreen', (req, res) => {
         authContainer.verify(req, res, function () {
             projectLogic.getProjectScreen(req.query.id,  function (thenData) {
+                debugger
+                res.status(200).send({ data: thenData });
+            }, function (err) {
+                res.status(400).send({ error: err });
+            });
+        });
+    })
+    app.get('/getAllProjectsScreens', (req, res) => {
+        authContainer.verify(req, res, function () {
+            projectLogic.getAllProjectsScreens(function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {
                 res.status(400).send({ error: err });
