@@ -35,7 +35,7 @@ module.exports = function (application) {
     })
     app.delete('/removeUser', (req, res) => {
         authContainer.verify(req, res, function () {
-            let id = req.query.id;
+            let id = req.body.id;
             authLogic.removeUser(id, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {

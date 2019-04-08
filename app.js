@@ -1,18 +1,18 @@
 require('dotenv').config();
-
 const multer = require('multer');
-const upload = multer({ storage: storage });
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
+app.use('/uploads',express.static(__dirname + '/public/uploads'));
 var storage = multer.diskStorage({
-    destination: 'uploads',
+    destination: 'public/uploads',
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
 });
+const upload = multer({ storage: storage });
 
 app.use(cors());
 app.use(bodyParser.json({limit: "50mb"}));

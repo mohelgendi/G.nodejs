@@ -13,7 +13,7 @@ module.exports = function (application, upload) {
             if(!file){
                 image = undefined;
             }else{
-                image ="glee.amatis.work/uploads/"+file.originalname;
+                image ="http://localhost:3000/uploads/"+file.originalname;
             }
             let name = req.body.projectName;
             let client = req.body.clientName;
