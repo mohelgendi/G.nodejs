@@ -10,17 +10,10 @@ module.exports = function (application, upload) {
     app = application;
     app.post('/addDeveloper', upload.single('image'),(req, res) => {
         authContainer.verify(req, res, function () {
-            console.log(req);
-            let image;
-            const file = req.file
-            if(!file){
-                image = undefined;
-            }else{
-                image = file.originalname;
-            }
-
             let name = req.body.name;
+            let image = req.file.path || undefined;
             let position = req.body.position;
+
             developerLogic.addDeveloper(name, position, image, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {

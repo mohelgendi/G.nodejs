@@ -15,17 +15,12 @@ module.exports = function (application, upload) {
     app = application;
     app.post('/addProject', upload.single('image'), (req, res) => {
         authContainer.verify(req, res, function () {
-            let image;
-            const file = req.file
-            if(!file){
-                image = undefined;
-            }else{
-                image =process.env.IMG_BASE_URL+file.originalname;
-            }
+            let image = req.file.path || undefined;
             let name = req.body.projectName;
             let client = req.body.clientName;
             let startDate = req.body.startDate;
             let endDate = req.body.endDate;
+
             projectLogic.addProject(name, client, startDate, endDate, image, function (thenData) {
                 res.status(200).send({ data: thenData });
             }, function (err) {
