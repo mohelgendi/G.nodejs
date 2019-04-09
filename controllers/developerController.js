@@ -16,8 +16,9 @@ module.exports = function (application, upload) {
             if(!file){
                 image = undefined;
             }else{
-                image = 'https://glee.amatis.work/public/uploads/'+file.originalname;
+                image = file.originalname;
             }
+
             let name = req.body.name;
             let position = req.body.position;
             developerLogic.addDeveloper(name, position, image, function (thenData) {
