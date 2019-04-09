@@ -4,6 +4,7 @@ let developerLogic = require('../logics/developerLogic.js');
 
 let HttpStatus = constants.HttpStatus;
 
+
 var app;
 module.exports = function (application, upload) {
     app = application;
@@ -15,7 +16,7 @@ module.exports = function (application, upload) {
             if(!file){
                 image = undefined;
             }else{
-                image ="http://localhost:3000/uploads/"+file.originalname;
+                image = 'https://glee.amatis.work/public/uploads/'+file.originalname;
             }
             let name = req.body.name;
             let position = req.body.position;

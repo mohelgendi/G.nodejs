@@ -20,7 +20,7 @@ module.exports = function (application, upload) {
             if(!file){
                 image = undefined;
             }else{
-                image ="http://localhost:3000/uploads/"+file.originalname;
+                image =process.env.IMG_BASE_URL+file.originalname;
             }
             let name = req.body.projectName;
             let client = req.body.clientName;

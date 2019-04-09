@@ -33,7 +33,7 @@ global.ormContainer = require('./ormContainer')(
     process.env.DB_USER,
     process.env.DB_PASS,
     process.env.DB_HOST,
-    process.env.DB_PORT,
+    process.env.DB_PORT
 );
 
 require('./controllers/developerController')(app, upload);
