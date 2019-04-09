@@ -7,9 +7,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-app.use('/uploads',express.static(__dirname + '/public/uploads'));
+
+app.use(express.static(__dirname + '/public'));
+
 var storage = multer.diskStorage({
-    destination: 'public/uploads',
+    destination: './uploads',
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
