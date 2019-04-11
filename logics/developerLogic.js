@@ -27,6 +27,18 @@ let developerLogic = {
         }
         return ormContainer.SelectByJSONOperands(findQuery);
     },
+    getDeveloperOverallScore: function (developerId, thenFunc, errFunc) {
+        let viewQuery = new ViewQueryModel();
+        viewQuery.view = "overall_score";
+        viewQuery.JSONFilter = { developer_id: { [ormContainer.Op.eq]: developerId } };
+        viewQuery.then = function (thenData) {
+            return thenFunc(thenData);
+        };
+        viewQuery.err = function (err) {
+            return errFunc(err);
+        };
+        return ormContainer.SelectViewByQuery(viewQuery)
+    },
     getAllDevelopers: function (thenFunc, errFunc) {
         let findQuery = new QueryJSONModel();
         findQuery.table = 'developer';
