@@ -1,40 +1,47 @@
-/* jshint indent: 1 */
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('project', {
+	const Project = sequelize.define('Project', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			primaryKey: true,
 			autoIncrement: true,
-			field: 'id'
 		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			field: 'name'
 		},
 		client: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			field: 'client'
 		},
 		image: {
 			type: DataTypes.STRING,
 			allowNull: true,
-			field: 'image'
 		},
-		startDate: {
+		start_date: {
 			type: DataTypes.STRING,
 			allowNull: true,
-			field: 'start_date'
 		},
-		endDate: {
+		end_date: {
 			type: DataTypes.STRING,
 			allowNull: true,
-			field: 'end_date'
 		}
 	}, {
-		tableName: 'project'
+		tableName: 'project',
+		timestamps: false,
+		underscored: true,
 	});
+
+	Project.associate = (models) => {
+		Project.belongsToMany(models.Developer, {
+			through: models.DeveloperProject,
+			as: 'developers',
+			foreignKey: 'project_id',
+			timestamps: false,
+		});
+	};
+
+	return Project;
 };

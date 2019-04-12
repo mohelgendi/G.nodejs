@@ -1,36 +1,39 @@
-/* jshint indent: 1 */
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('developer', {
+	const Developer = sequelize.define('Developer', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			primaryKey: true,
 			autoIncrement: true,
-			field: 'id'
 		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			field: 'name'
-		},
-		overallScore: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			defaultValue: '0',
-			field: 'overall_score'
 		},
 		image: {
 			type: DataTypes.STRING,
 			allowNull: true,
-			field: 'image'
 		},
 		position: {
 			type: DataTypes.STRING,
 			allowNull: true,
-			field: 'position'
 		}
 	}, {
-		tableName: 'developer'
+		tableName: 'developer',
+		timestamps: false,
+		underscored: true,
 	});
+
+	Developer.associate = (models) => {
+		Developer.belongsToMany(models.Project, {
+			through: 'works_on',
+			as: 'projects',
+			foreignKey: 'developer_id',
+			timestamps: false,
+		});
+	};
+
+	return Developer;
 };

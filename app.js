@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-
 app.use(express.static(__dirname + '/public'));
 
 var storage = multer.diskStorage({
