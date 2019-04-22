@@ -1,15 +1,14 @@
 const authContainer = require('../authContainer');
-const projectLogic = require('../logics/projectLogic.js');
 const models = require('../models');
 
-module.exports = function (app, upload) {
+module.exports = (app, upload) => {
     /**
      * Create projects.
      *
      * @todo attach / assign developers by given array
      */
     app.post('/project', upload.single('image'), (req, res) => {
-        authContainer.verify(req, res, function () {
+        authContainer.verify(req, res, () => {
             models.Project.create({
                 name: req.body.name,
                 client: req.body.client,
@@ -43,7 +42,7 @@ module.exports = function (app, upload) {
      * Get a project by id.
      */
     app.get('/project/:id', (req, res) => {
-        authContainer.verify(req, res, function () {
+        authContainer.verify(req, res, () => {
             models.Project.findOne({
                 where: {
                     id: req.params.id
@@ -59,7 +58,7 @@ module.exports = function (app, upload) {
                         ]
                     },
                 }]
-            }).then(data => res.status(200).send({ data: data }));
+            }).then(data => res.send({ data: data }));
         });
     });
 
@@ -67,7 +66,7 @@ module.exports = function (app, upload) {
      * Delete a project by id.
      */
     app.delete('/project/:id', (req, res) => {
-        authContainer.verify(req, res, function () {
+        authContainer.verify(req, res, () => {
             models.Project.destroy({
                 where: {
                     id: req.params.id
