@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (sequelize, DataTypes) {
-    const DeveloperProject = sequelize.define('DeveloperProject', {
+    const WorksOn = sequelize.define('WorksOn', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -48,5 +48,5 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false,
     });
 
-    return DeveloperProject;
+    return WorksOn;
 };

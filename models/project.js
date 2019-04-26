@@ -36,8 +36,13 @@ module.exports = function(sequelize, DataTypes) {
 
 	Project.associate = (models) => {
 		Project.belongsToMany(models.Developer, {
-			through: models.DeveloperProject,
+			through: models.WorksOn,
 			as: 'developers',
+			foreignKey: 'project_id',
+			timestamps: false,
+		});
+		Project.hasOne(models.ProjectEvaluation, {
+			as: 'projectEvaluation',
 			foreignKey: 'project_id',
 			timestamps: false,
 		});

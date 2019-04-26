@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
 
 	Developer.associate = (models) => {
 		Developer.belongsToMany(models.Project, {
-			through: 'works_on',
+			through: models.WorksOn,
 			as: 'projects',
 			foreignKey: 'developer_id',
 			timestamps: false,

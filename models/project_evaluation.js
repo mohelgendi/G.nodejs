@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('projectEvaluation', {
+	const ProjectEvaluation = sequelize.define('ProjectEvaluation', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -31,6 +31,8 @@ module.exports = function(sequelize, DataTypes) {
 			field: 'client_evaluation'
 		}
 	}, {
-		tableName: 'project_evaluation'
+		tableName: 'project_evaluation',
+		timestamps: false
 	});
+	return ProjectEvaluation;
 };
