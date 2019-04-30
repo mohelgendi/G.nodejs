@@ -31,9 +31,9 @@ module.exports = (app, upload) => {
                     as: 'developers',
                     through: {
                         attributes: [
-                            'dev_tech_skills_score',
-                            'dev_teamwork_score',
-                            'dev_communication_score',
+                            'devCommunicationScore',
+                            'devTechSkillsScore',
+                            'devTeamworkScore',
                         ]
                     }
                 },
@@ -63,9 +63,9 @@ module.exports = (app, upload) => {
                     as: 'developers',
                     through: {
                         attributes: [
-                            'dev_tech_skills_score',
-                            'dev_teamwork_score',
-                            'dev_communication_score',
+                            'devCommunicationScore',
+                            'devTechSkillsScore',
+                            'devTeamworkScore',
                         ]
                     }
                 },
@@ -88,7 +88,7 @@ module.exports = (app, upload) => {
         authContainer.verify(req, res, () => {
             models.Project.destroy({
                 where: {
-                    id: req.query.id
+                    id: req.body.id
                 }
             }).then(data => res.send({ data: data }))
         });

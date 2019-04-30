@@ -1,50 +1,57 @@
-'use strict';
+/* jshint indent: 1 */
 
 module.exports = function (sequelize, DataTypes) {
     const WorksOn = sequelize.define('WorksOn', {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        developer_id: {
-            type: DataTypes.BIGINT,
-            field: 'developer_id',
-            allowNull: false,
-            references: {
-                model: 'Developer',
-                key: 'id'
-            },
-        },
-        project_id: {
-            type: DataTypes.BIGINT,
-            field: 'project_id',
-            allowNull: false,
-            references: {
-                model: 'Project',
-                key: 'id'
-            },
-        },
-        dev_communication_score: {
-            type: DataTypes.BIGINT,
-            defaultValue: 0,
-        },
-        dev_tech_skills_score: {
-            type: DataTypes.BIGINT,
-            defaultValue: 0,
-        },
-        dev_teamwork_score: {
-            type: DataTypes.BIGINT,
-            defaultValue: 0,
-        },
-        comment: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        }
-    }, {
+		id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			primaryKey: true,
+			autoIncrement: true,
+			field: 'id'
+		},
+		developerId: {
+			type: DataTypes.BIGINT,
+			allowNull: false,
+			references: {
+				model: 'developer',
+				key: 'id'
+			},
+			field: 'developer_id'
+		},
+		projectId: {
+			type: DataTypes.BIGINT,
+			allowNull: false,
+			references: {
+				model: 'project',
+				key: 'id'
+			},
+			field: 'project_id'
+		},
+		devCommunicationScore: {
+			type: DataTypes.BIGINT,
+			allowNull: false,
+			defaultValue: '0',
+			field: 'dev_communication_score'
+		},
+		devTechSkillsScore: {
+			type: DataTypes.BIGINT,
+			allowNull: false,
+			defaultValue: '0',
+			field: 'dev_tech_skills_score'
+		},
+		devTeamworkScore: {
+			type: DataTypes.BIGINT,
+			allowNull: false,
+			defaultValue: '0',
+			field: 'dev_teamwork_score'
+		},
+		comment: {
+			type: DataTypes.STRING,
+			allowNull: true,
+			field: 'comment'
+		}
+	}, {
         tableName: 'works_on',
-        underscored: true,
         timestamps: false,
     });
 

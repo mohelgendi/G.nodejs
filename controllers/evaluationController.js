@@ -5,38 +5,47 @@ module.exports = function (app) {
 
     app.put('/evaluateDeveloperOnProject', (req, res) => {
         authContainer.verify(req, res, () => {
-            models.WorksOn.update({
-                project_id: req.body.projectId,
-                developer_id: req.body.developerId,
-                dev_communication_score: req.body.communication,
-                dev_tech_skills_score: req.body.techSkill,
-                dev_teamwork_score: req.body.teamwork
-            },
+            let newData = {
+                devCommunicationScore: req.body.communication,
+                devTechSkillsScore: req.body.techSkill,
+                devTeamworkScore: req.body.teamwork
+            };
+            Object.keys(newData).forEach(function (key) {
+                if (newData[key] === undefined) {
+                    delete newData[key];
+                }
+            });
+            models.WorksOn.update(newData,
                 {
                     where:
                     {
-                        project_id: req.body.projectId,
-                        developer_id: req.body.developerId,
-                    }
+                        projectId: req.body.projectId,
+                        developerId: req.body.developerId
+                    },
+                    returning: true
                 }).then(created => res.send({ data: created }));
         });
     });
 
     app.put('/evaluateProject', (req, res) => {
         authContainer.verify(req, res, () => {
-            console.log('INN')
-            models.ProjectEvaluation.update({
-                project_id: req.body.projectId,
-                in_house_evaluation: req.body.inHouseEvaluation,
-                client_evaluation: req.body.clientEvaluation,
-            },
-                {
-                    where:
-                    {
-                        project_id: req.body.projectId
-                    }
-                }).then(created => res.send({ data: created }));
+            let newData = {
+                inHouseEvaluation: req.body.inHouseEvaluation,
+                clientEvaluation: req.body.clientEvaluation
+            };
+            Object.keys(newData).forEach(function (key) {
+                if (newData[key] === undefined) {
+                    delete newData[key];
+                }
+            });
+            models.ProjectEvaluation.update(newData, {
+                where: { project_id: req.body.projectId },
+                returning: true
+            })
+                .then(created => {
+                    res.send({ data: created })
+                })
+
         });
     })
-
 }

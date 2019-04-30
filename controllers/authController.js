@@ -12,7 +12,7 @@ module.exports = function (application) {
         },function(token, relatedProject){
             res.status(200).send({ token, relatedProject});
         });
-    })
+    });
 
     app.post('/addUser', (req, res) => {
         let username = req.body.username;
@@ -23,7 +23,8 @@ module.exports = function (application) {
         },function(err){
             res.status(400).send({ error: err});
         })
-    })
+    });
+
     app.get('/getAllUsers', (req, res) => {
         authContainer.verify(req, res, function () {
             authLogic.getAllUsers(function (thenData) {
@@ -32,7 +33,8 @@ module.exports = function (application) {
                 res.status(400).send({ error: err });
             });
         });
-    })
+    });
+
     app.delete('/removeUser', (req, res) => {
         authContainer.verify(req, res, function () {
             let id = req.body.id;
@@ -42,5 +44,5 @@ module.exports = function (application) {
                 res.status(400).send({ error: err });
             });
         });
-    })
+    });
 }
