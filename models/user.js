@@ -1,7 +1,5 @@
-/* jshint indent: 1 */
-
 module.exports = function(sequelize, DataTypes) {
-	const User =  sequelize.define('user', {
+	return sequelize.define('User', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -29,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
 			field: 'related_project'
 		}
 	}, {
-		tableName: 'user'
+		tableName: 'user',
+		timestamps: false,
 	});
-	return User;
 };
