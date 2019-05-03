@@ -1,96 +1,89 @@
-const authContainer = require('../authContainer');
 const models = require('../models');
 
-module.exports = (app, upload) => {
+module.exports = (router, upload) => {
     /*
      * Create projects.
     */
-    app.post('/project', upload.single('image'), (req, res) => {
-        authContainer.verify(req, res, () => {
-            models.Project.create({
-                name: req.body.name,
-                client: req.body.client,
-                start_date: req.body.startDate,
-                end_date: req.body.endDate,
-                image: "undefined" !== typeof req.file ? req.file.path : undefined
-            }).then(created => {
-                models.ProjectEvaluation.create({ projectId: created.id });
-                res.send({ data: created });
-            });
+    router.post('/projects', upload.single('image'), (req, res) => {
+        models.Project.create({
+            name: req.body.name,
+            client: req.body.client,
+            start_date: req.body.startDate,
+            end_date: req.body.endDate,
+            image: "undefined" !== typeof req.file ? req.file.path : undefined
+        }).then(data => {
+            models.ProjectEvaluation.create({ projectId: data.id });
+            res.send({ data });
         });
     });
 
     /*
      * Get all projects.
     */
-    app.get('/projects', (req, res) => {
-        authContainer.verify(req, res, () => {
-            models.Project.findAll({
-                include: [{
-                    model: models.Developer,
-                    as: 'developers',
-                    through: {
-                        attributes: [
-                            'devCommunicationScore',
-                            'devTechSkillsScore',
-                            'devTeamworkScore',
-                        ]
-                    }
-                },
-                {
-                    model: models.ProjectEvaluation,
-                    as: 'projectEvaluation',
+    router.get('/projects', (req, res) => {
+        models.Project.findAll({
+            include: [{
+                model: models.Developer,
+                as: 'developers',
+                through: {
                     attributes: [
-                        'inHouseEvaluation',
-                        'clientEvaluation'
+                        'devCommunicationScore',
+                        'devTechSkillsScore',
+                        'devTeamworkScore',
                     ]
-                }]
-            }).then(data => res.send({ data: data }));
-        });
+                }
+            },
+            {
+                model: models.ProjectEvaluation,
+                as: 'projectEvaluation',
+                attributes: [
+                    'inHouseEvaluation',
+                    'clientEvaluation'
+                ]
+            }]
+        }).then(data => res.send({ data }));
     });
 
     /*
      * Get a project by id.
     */
-    app.get('/project', (req, res) => {
-        authContainer.verify(req, res, () => {
-            models.Project.findOne({
-                where: {
-                    id: req.query.id
-                },
-                include: [{
-                    model: models.Developer,
-                    as: 'developers',
-                    through: {
-                        attributes: [
-                            'devCommunicationScore',
-                            'devTechSkillsScore',
-                            'devTeamworkScore',
-                        ]
-                    }
-                },
-                {
-                    model: models.ProjectEvaluation,
-                    as: 'projectEvaluation',
+    router.get('/projects/:id', (req, res) => {
+        models.Project.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [{
+                model: models.Developer,
+                as: 'developers',
+                through: {
                     attributes: [
-                        'inHouseEvaluation',
-                        'clientEvaluation'
+                        'devCommunicationScore',
+                        'devTechSkillsScore',
+                        'devTeamworkScore',
                     ]
-                }]
-            }).then(data => res.send({ data: data }));
-        });
+                }
+            },
+            {
+                model: models.ProjectEvaluation,
+                as: 'projectEvaluation',
+                attributes: [
+                    'inHouseEvaluation',
+                    'clientEvaluation'
+                ]
+            }]
+        }).then(data => res.send({ data }));
     });
 
     /*
      * Delete a project by id.
     */
-    app.delete('/project', (req, res) => {
-        authContainer.verify(req, res, () => {
-            models.Project.destroy({
-                where: {
-                    id: req.body.id
-                }
-            }).then(data => res.send({ data: data }))
-        });
+    router.delete('/projects/:id', (req, res) => {
+        models.Project.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(data => res.send({ data }))
     });
+
+    return router;
 };

@@ -1,48 +1,27 @@
-const authContainer = require('../authContainer');
-let authLogic = require('../logics/authLogic.js');
+const jwt = require('jsonwebtoken');
+const models = require('../models');
 
-var app;
-module.exports = function (application) {
-    app = application;
-    app.get('/getToken', (req, res) => {
-        let username = req.query.username;
-        let password = req.query.password;
-        authContainer.sign(username, password, function(err){
-            res.status(401).send({ error: err});
-        },function(token, relatedProject){
-            res.status(200).send({ token, relatedProject});
-        });
+module.exports = function (router) {
+    router.get('/getToken', (req, res) => {
+        models.User.findOne({
+            where: {name: req.query.username, password: req.query.password}
+        }).then(user => {
+            if (null === user) {
+                res.status(401).json({
+                    error: {
+                        message: 'Wrong username or password!'
+                    }
+                });
+            } else {
+                res.json({
+                    relatedProject: user.relatedProject,
+                    token: jwt.sign({
+                        id: user.id
+                    }, process.env.JWT_SECRET, { expiresIn: '5d' })
+                });
+            }
+        }).catch(e => console.log(e));
     });
 
-    app.post('/addUser', (req, res) => {
-        let username = req.body.username;
-        let password = req.body.password;
-        let relatedProject = req.body.relatedProject;
-        authLogic.addUser(username, password, relatedProject, function(thenData){
-            res.status(200).send({ user: thenData});
-        },function(err){
-            res.status(400).send({ error: err});
-        })
-    });
-
-    app.get('/getAllUsers', (req, res) => {
-        authContainer.verify(req, res, function () {
-            authLogic.getAllUsers(function (thenData) {
-                res.status(200).send({ data: thenData });
-            }, function (err) {
-                res.status(400).send({ error: err });
-            });
-        });
-    });
-
-    app.delete('/removeUser', (req, res) => {
-        authContainer.verify(req, res, function () {
-            let id = req.body.id;
-            authLogic.removeUser(id, function (thenData) {
-                res.status(200).send({ data: thenData });
-            }, function (err) {
-                res.status(400).send({ error: err });
-            });
-        });
-    });
-}
+    return router;
+};
