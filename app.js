@@ -39,13 +39,13 @@ app.use('/api', require('./middlewares/auth.js'));
  * These api endpoints are secured. You need to defined auth token to the request headers.
  */
 app.use('/api', require('./controllers/projectController.js')(router, upload));
-
-
+app.use('/api', require('./controllers/developerController.js')(router, upload));
+app.use('/api', require('./controllers/evaluationController.js')(router));
+app.use('/api', require('./controllers/userController.js')(router));
 /**
  * We don't want to use auth. methods here for the public endpoints.
  */
 app.use('/', require('./controllers/authController')(router));
-
 
 /**
  * Start our application.

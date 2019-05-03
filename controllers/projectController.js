@@ -11,9 +11,9 @@ module.exports = (router, upload) => {
             start_date: req.body.startDate,
             end_date: req.body.endDate,
             image: "undefined" !== typeof req.file ? req.file.path : undefined
-        }).then(created => {
-            models.ProjectEvaluation.create({ projectId: created.id });
-            res.send({ data: created });
+        }).then(data => {
+            models.ProjectEvaluation.create({ projectId: data.id });
+            res.send({ data });
         });
     });
 
@@ -41,7 +41,7 @@ module.exports = (router, upload) => {
                     'clientEvaluation'
                 ]
             }]
-        }).then(data => res.send({ data: data }));
+        }).then(data => res.send({ data }));
     });
 
     /*
@@ -71,18 +71,18 @@ module.exports = (router, upload) => {
                     'clientEvaluation'
                 ]
             }]
-        }).then(data => res.send({ data: data }));
+        }).then(data => res.send({ data }));
     });
 
     /*
      * Delete a project by id.
     */
-    router.delete('/project/:id', (req, res) => {
+    router.delete('/projects/:id', (req, res) => {
         models.Project.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(data => res.send({ data: data }))
+        }).then(data => res.send({ data }))
     });
 
     return router;

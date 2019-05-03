@@ -1,7 +1,7 @@
 const models = require('../models');
 
-module.exports = function (app) {
-    app.put('/evaluateDeveloperOnProject', (req, res) => {
+module.exports = (router)=>{
+    router.put('/evaluate/developer', (req, res) => {
         let newData = {
             devCommunicationScore: req.body.communication,
             devTechSkillsScore: req.body.techSkill,
@@ -23,7 +23,7 @@ module.exports = function (app) {
             }).then(created => res.send({ data: created }));
     });
 
-    app.put('/evaluateProject', (req, res) => {
+    router.put('/evaluate/project', (req, res) => {
         let newData = {
             inHouseEvaluation: req.body.inHouseEvaluation,
             clientEvaluation: req.body.clientEvaluation
@@ -40,5 +40,7 @@ module.exports = function (app) {
         .then(created => {
             res.send({ data: created })
         })
-    })
+    });
+    
+    return router;
 };

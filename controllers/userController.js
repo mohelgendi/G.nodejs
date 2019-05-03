@@ -1,37 +1,25 @@
-const authContainer = require('../authContainer');
-let authLogic = require('../logics/authLogic.js');
+const models = require('../models');
 
-module.exports = function (app) {
+module.exports = (app) => {
     app.post('/addUser', (req, res) => {
-        let username = req.body.username;
-        let password = req.body.password;
-        let relatedProject = req.body.relatedProject;
-
-        authLogic.addUser(username, password, relatedProject, function(thenData){
-            res.status(200).send({ user: thenData});
-        },function(err){
-            res.status(400).send({ error: err});
-        })
+        models.User.create({
+            name: req.body.username,
+            password: req.body.password,
+            relatedProject: req.body.relatedProject
+        }).then(data => res.send({ data: data }));
     });
 
     app.get('/getAllUsers', (req, res) => {
-        authContainer.verify(req, res, function () {
-            authLogic.getAllUsers(function (thenData) {
-                res.status(200).send({ data: thenData });
-            }, function (err) {
-                res.status(400).send({ error: err });
-            });
-        });
+        models.User.findAll({}).then(data => res.send({ data: data }));
     });
 
-    app.delete('/removeUser', (req, res) => {
-        authContainer.verify(req, res, function () {
-            let id = req.body.id;
-            authLogic.removeUser(id, function (thenData) {
-                res.status(200).send({ data: thenData });
-            }, function (err) {
-                res.status(400).send({ error: err });
-            });
-        });
+    app.delete('/removeUser/:id', (req, res) => {
+        models.User.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(data => res.send({ data: data }))
     });
+
+    return app
 }

@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const models = require('../models');
 
 module.exports = function (router) {
-    router.post('/login', (req, res) => {
+    router.get('/getToken', (req, res) => {
         models.User.findOne({
-            where: {name: req.body.username, password: req.body.password}
+            where: {name: req.query.username, password: req.query.password}
         }).then(user => {
             if (null === user) {
                 res.status(401).json({
@@ -14,10 +14,10 @@ module.exports = function (router) {
                 });
             } else {
                 res.json({
-                    user,
-                    jwt: jwt.sign({
+                    relatedProject: user.relatedProject,
+                    token: jwt.sign({
                         id: user.id
-                    }, process.env.JWT_SECRET, { expiresIn: '365d' })
+                    }, process.env.JWT_SECRET, { expiresIn: '5d' })
                 });
             }
         }).catch(e => console.log(e));

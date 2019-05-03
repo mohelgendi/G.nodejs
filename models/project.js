@@ -41,6 +41,7 @@ module.exports = function(sequelize, DataTypes) {
 			foreignKey: 'project_id',
 			timestamps: false,
 		});
+
 		Project.hasOne(models.ProjectEvaluation, {
 			as: 'projectEvaluation',
 			foreignKey: 'project_id',

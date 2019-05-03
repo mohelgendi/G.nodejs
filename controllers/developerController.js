@@ -1,6 +1,6 @@
 const models = require('../models');
 
-module.exports = function (router, upload) {
+module.exports = (router, upload) =>{
     /**
      * Create a developer.
      */
@@ -65,17 +65,17 @@ module.exports = function (router, upload) {
     });
 
     /**
-     *
+     * Assign a developer to project
      */
-    router.post('/developer/:id/assign', (req, res) => {
+    router.post('/developers/:developerId/assign/:projectId', (req, res) => {
         models.WorksOn.create({
-            developerId: req.body.developerId,
-            projectId: req.body.projectId,
+            developerId: req.params.developerId,
+            projectId: req.params.projectId,
         }).then(created => res.send({ data: created }));
     });
 
     /**
-     *
+     * Unassign developer from project
      */
     router.delete('/developers/:id/unassign/:projectId', (req, res) => {
         models.WorksOn.destroy({
