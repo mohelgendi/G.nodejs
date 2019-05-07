@@ -4,10 +4,7 @@ const models = require('../models');
 module.exports = function (router) {
     router.get('/getToken', (req, res) => {
         models.User.findOne({
-            where: {
-                name: req.query.username,
-                password: req.query.password
-            }
+            where: {name: req.query.username, password: req.query.password}
         }).then(user => {
             if (null === user) {
                 res.status(401).json({

@@ -8,7 +8,7 @@ module.exports = (router, upload) =>{
         models.Developer.create({
             name: req.body.name,
             position: req.body.position,
-            image: 'undefined' !== typeof req.file ? req.file.path : 'uploads/AmatisUserX.png'
+            image: 'undefined' !== typeof req.file ? req.file.path : 'uploads/User.png'
         }).then(created => res.send({ data: created }));
     });
 
@@ -52,28 +52,6 @@ module.exports = (router, upload) =>{
             }]
         }).then(data => res.send({ data: data }));
     });
-    /**
-     * update developer
-     */
-    router.put('/developers', upload.single('image'), (req, res) => {
-        let newData = {
-            name: req.body.name,
-            position: req.body.position,
-            image: 'undefined' !== typeof req.file ? req.file.path : 'uploads/AmatisUserX.png'
-        };
-        Object.keys(newData).forEach(function (key) {
-            if (newData[key] === undefined || newData[key] === '') {
-                delete newData[key];
-            }
-        });
-        models.Developer.update(newData, {
-            where: { id: req.body.developerId },
-            returning: true
-        })
-        .then(created => {
-            res.send({ data: created })
-        })
-    });
 
     /**
      * Delete a developer by id.
@@ -106,31 +84,6 @@ module.exports = (router, upload) =>{
                 projectId: req.params.projectId,
             }
         }).then(data => res.send({ data: data }))
-    });
-
-    /**
-     * Evaluate a developer.
-     */
-    router.put('/developers/:id/evaluate', (req, res) => {
-        let newData = {
-            devCommunicationScore: req.body.communication,
-            devTechSkillsScore: req.body.techSkill,
-            devTeamworkScore: req.body.teamwork
-        };
-
-        Object.keys(newData).forEach(function (key) {
-            if (newData[key] === undefined) {
-                delete newData[key];
-            }
-        });
-
-        models.WorksOn.update(newData, {
-            where: {
-                projectId: req.params.id,
-                developerId: req.body.developerId
-            },
-            returning: true
-        }).then(created => res.send({ data: created }));
     });
 
     return router;
