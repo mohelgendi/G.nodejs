@@ -1,9 +1,9 @@
 const models = require('../models');
 
 module.exports = (router, upload) => {
-    /*
-     * Create projects.
-    */
+    /**
+     *
+     */
     router.post('/projects', upload.single('image'), (req, res) => {
         models.Project.create({
             name: req.body.name,
@@ -18,7 +18,7 @@ module.exports = (router, upload) => {
     });
 
     /**
-     * update project
+     *
      */
     router.put('/projects', upload.single('image'), (req, res) => {
         let newData = {
@@ -42,7 +42,7 @@ module.exports = (router, upload) => {
         })
     });
 
-    /*
+    /**
      * Get all projects.
     */
     router.get('/projects', (req, res) => {
@@ -69,7 +69,7 @@ module.exports = (router, upload) => {
         }).then(data => res.send({ data }));
     });
 
-    /*
+    /**
      * Get a project by id.
     */
     router.get('/projects/:id', (req, res) => {
@@ -99,7 +99,7 @@ module.exports = (router, upload) => {
         }).then(data => res.send({ data }));
     });
 
-    /*
+    /**
      * Delete a project by id.
     */
     router.delete('/projects/:id', (req, res) => {
@@ -108,6 +108,23 @@ module.exports = (router, upload) => {
                 id: req.params.id
             }
         }).then(data => res.send({ data }))
+    });
+
+    /**
+     * Evaluate a project.
+     */
+    router.put('/projects/:id/evaluate', (req, res) => {
+        Object.keys(req.body).forEach((key) => {
+            if ("undefined" === typeof req.body[key]) {
+                delete req.body[key];
+            }
+        });
+
+        models.ProjectEvaluation.update(req.body, {
+            where: { project_id: req.params.id },
+            returning: true
+        })
+            .then(created => res.send({ data: created }))
     });
 
     return router;

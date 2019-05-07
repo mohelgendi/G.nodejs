@@ -108,5 +108,30 @@ module.exports = (router, upload) =>{
         }).then(data => res.send({ data: data }))
     });
 
+    /**
+     * Evaluate a developer.
+     */
+    router.put('/developers/:id/evaluate', (req, res) => {
+        let newData = {
+            devCommunicationScore: req.body.communication,
+            devTechSkillsScore: req.body.techSkill,
+            devTeamworkScore: req.body.teamwork
+        };
+
+        Object.keys(newData).forEach(function (key) {
+            if (newData[key] === undefined) {
+                delete newData[key];
+            }
+        });
+
+        models.WorksOn.update(newData, {
+            where: {
+                projectId: req.params.id,
+                developerId: req.body.developerId
+            },
+            returning: true
+        }).then(created => res.send({ data: created }));
+    });
+
     return router;
 };

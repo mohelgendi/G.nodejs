@@ -1,29 +1,25 @@
 #!/usr/bin/env node
 
 require('dotenv').config();
+
 const multer = require('multer');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = express.Router();
 const app = express();
-
-app.use(express.static(__dirname + '/public'));
-
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: './uploads',
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
 });
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage
+});
 
+app.use(express.static(__dirname + '/public'));
 app.use(cors());
-
-app.use(bodyParser.json({
-    limit: "50mb"
-}));
-
 app.use(bodyParser.urlencoded({
     limit: "50mb",
     extended: true,
@@ -42,6 +38,7 @@ app.use('/api', require('./controllers/projectController.js')(router, upload));
 app.use('/api', require('./controllers/developerController.js')(router, upload));
 app.use('/api', require('./controllers/evaluationController.js')(router));
 app.use('/api', require('./controllers/userController.js')(router));
+
 /**
  * We don't want to use auth. methods here for the public endpoints.
  */
