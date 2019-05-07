@@ -8,7 +8,7 @@ module.exports = (router, upload) =>{
         models.Developer.create({
             name: req.body.name,
             position: req.body.position,
-            image: 'undefined' !== typeof req.file ? req.file.path : 'uploads/User.png'
+            image: 'undefined' !== typeof req.file ? req.file.path : 'uploads/AmatisUserX.png'
         }).then(created => res.send({ data: created }));
     });
 
@@ -51,6 +51,28 @@ module.exports = (router, upload) =>{
                 }
             }]
         }).then(data => res.send({ data: data }));
+    });
+    /**
+     * update developer
+     */
+    router.put('/developers', upload.single('image'), (req, res) => {
+        let newData = {
+            name: req.body.name,
+            position: req.body.position,
+            image: 'undefined' !== typeof req.file ? req.file.path : 'uploads/AmatisUserX.png'
+        };
+        Object.keys(newData).forEach(function (key) {
+            if (newData[key] === undefined || newData[key] === '') {
+                delete newData[key];
+            }
+        });
+        models.Developer.update(newData, {
+            where: { id: req.body.developerId },
+            returning: true
+        })
+        .then(created => {
+            res.send({ data: created })
+        })
     });
 
     /**
